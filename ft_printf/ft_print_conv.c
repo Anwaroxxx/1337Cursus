@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/23 00:21:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/23 00:21:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/07/22 09:33:14 by anwar             #+#    #+#             */
+/*   Updated: 2026/08/22 23:47:19 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
 int	conv_c(va_list ap, t_fmt *f)
@@ -29,21 +28,8 @@ int	conv_c(va_list ap, t_fmt *f)
 
 int	conv_pct(t_fmt *f)
 {
-	int	pad;
-
-	pad = f->width - 1;
-	if (!f->left && pad > 0)
-	{
-		if (f->zero)
-			pf_pad('0', pad);
-		else
-			pf_pad(' ', pad);
-	}
+	(void)f;
 	pf_char('%');
-	if (f->left && pad > 0)
-		pf_pad(' ', pad);
-	if (pad > 0)
-		return (pad + 1);
 	return (1);
 }
 

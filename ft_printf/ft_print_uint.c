@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/23 00:21:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/23 00:21:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/07/24 14:41:09 by anwar             #+#    #+#             */
+/*   Updated: 2026/08/17 20:03:55 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
 static int	pf_nil(t_fmt *f)
@@ -43,7 +42,7 @@ int	conv_x(va_list ap, t_fmt *f)
 	return (pf_putnum(f, va_arg(ap, unsigned int)));
 }
 
-int	conv_X(va_list ap, t_fmt *f)
+int	conv_xup(va_list ap, t_fmt *f)
 {
 	f->base = 16;
 	f->set = PF_HEXUP;

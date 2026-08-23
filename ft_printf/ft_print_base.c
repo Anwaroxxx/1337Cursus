@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/23 00:21:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/23 00:21:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/07/23 15:19:48 by anwar             #+#    #+#             */
+/*   Updated: 2026/08/23 01:05:47 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
 static size_t	digit_count(unsigned long n, unsigned long base)
@@ -25,45 +24,31 @@ static size_t	digit_count(unsigned long n, unsigned long base)
 	return (len);
 }
 
-static int	put_digits(t_fmt *f)
+static int	pf_sign(t_fmt *f, int emit)
 {
-	char	buf[32];
-	size_t	i;
-	size_t	n;
-
-	n = f->val;
-	i = f->ndig;
-	while (i > 0)
-	{
-		i--;
-		buf[i] = f->set[n % f->base];
-		n /= f->base;
-	}
-	return ((int)write(1, buf, f->ndig));
+	if (!(f->neg || ((f->plus || f->space)
+				&& (f->conv == 'd' || f->conv == 'i' || f->conv == 'p'))))
+		return (0);
+	if (!emit)
+		return (1);
+	if (f->neg)
+		pf_char('-');
+	else if (f->plus)
+		pf_char('+');
+	else
+		pf_char(' ');
+	return (1);
 }
 
 static int	prefix(t_fmt *f, int emit)
 {
 	int	len;
 
-	len = 0;
-	if (f->neg || ((f->conv == 'd' || f->conv == 'i')
-			&& (f->plus || f->space)))
-	{
-		len = 1;
-		if (!emit)
-			return (len);
-		if (f->neg)
-			pf_char('-');
-		else if (f->plus)
-			pf_char('+');
-		else
-			pf_char(' ');
-	}
-	else if (f->conv == 'p' || (f->hash && f->val != 0
+	len = pf_sign(f, emit);
+	if (f->conv == 'p' || (f->hash && f->val != 0
 			&& (f->conv == 'x' || f->conv == 'X')))
 	{
-		len = 2;
+		len += 2;
 		if (emit && f->conv == 'X')
 			pf_str("0X");
 		else if (emit)
@@ -105,7 +90,7 @@ int	pf_putnum(t_fmt *f, unsigned long n)
 	prefix(f, 1);
 	pf_pad('0', (int)(f->zeros + f->fill));
 	if (f->ndig > 0)
-		put_digits(f);
+		pf_digits(f);
 	if (f->left)
 		pf_pad(' ', f->spaces);
 	return (total + f->spaces);

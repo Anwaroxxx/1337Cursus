@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/23 00:21:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/23 00:21:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/07/20 13:45:52 by anwar             #+#    #+#             */
+/*   Updated: 2026/08/19 22:14:36 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
 static int	route(t_fmt *f, va_list ap)
@@ -25,7 +24,7 @@ static int	route(t_fmt *f, va_list ap)
 	if (f->conv == 'x')
 		return (conv_x(ap, f));
 	if (f->conv == 'X')
-		return (conv_X(ap, f));
+		return (conv_xup(ap, f));
 	if (f->conv == 'p')
 		return (conv_p(ap, f));
 	if (f->conv == '%')
