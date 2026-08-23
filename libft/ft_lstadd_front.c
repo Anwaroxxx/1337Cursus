@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 23:56:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/22 23:56:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/07/06 14:53:08 by anwar             #+#    #+#             */
+/*   Updated: 2026/07/06 15:01:44 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new_node)

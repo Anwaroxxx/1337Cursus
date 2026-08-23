@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 23:56:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/22 23:56:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/06/26 11:16:38 by anwar             #+#    #+#             */
+/*   Updated: 2026/06/26 11:29:52 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)

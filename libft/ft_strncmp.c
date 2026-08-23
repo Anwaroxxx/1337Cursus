@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 23:56:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/22 23:56:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/06/26 10:13:29 by anwar             #+#    #+#             */
+/*   Updated: 2026/06/26 10:31:46 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 23:56:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/22 23:56:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/07/03 10:22:41 by anwar             #+#    #+#             */
+/*   Updated: 2026/07/03 10:58:14 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))

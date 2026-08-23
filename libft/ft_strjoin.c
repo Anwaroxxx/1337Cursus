@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anwar <anwar@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 23:56:47 by anwar             #+#    #+#             */
-/*   Updated: 2026/08/22 23:56:47 by anwar            ###   ########.fr       */
+/*   Created: 2026/06/29 16:56:44 by anwar             #+#    #+#             */
+/*   Updated: 2026/06/29 17:23:18 by anwar            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
