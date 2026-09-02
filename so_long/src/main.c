@@ -11,11 +11,11 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
 		error_exit("Usage: ./so_long <map.ber>", &game);
 	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
 		error_exit("Error: Map file must have .ber extension", &game);
-	ft_bzero(&game, sizeof(t_game));
 	parse_map(argv[1], &game);
 	validate_map(&game);
 	init_game(&game);
