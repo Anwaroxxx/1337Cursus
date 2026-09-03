@@ -23,6 +23,7 @@
 # define TILE_COLLECTIBLE 'C'
 # define TILE_EXIT 'E'
 # define TILE_PLAYER 'P'
+# define TILE_ENEMY 'M'
 
 typedef struct s_img
 {
@@ -59,6 +60,8 @@ typedef struct s_game
 	t_img	player;
 	t_img	collectible;
 	t_img	exit;
+	t_img	exit_open;
+	t_img	enemy;
 	t_img	player_up;
 	t_img	player_down;
 	t_img	player_left;
@@ -66,6 +69,12 @@ typedef struct s_game
 	int		moves;
 	int		collectibles_collected;
 	int		game_over;
+	int		player_dir;
+	int		frame_count;
+	int		enemy_count;
+	int		enemy_x[10];
+	int		enemy_y[10];
+	int		enemy_dir[10];
 }	t_game;
 
 void	error_exit(char *msg, t_game *game);
@@ -87,12 +96,15 @@ void	free_game(t_game *game);
 void	free_map(t_map *map);
 void	free_map_array(char **grid);
 t_img	load_xpm(t_game *game, char *path);
-t_img	create_color_image(t_game *game, int color);
 
 int		is_wall(t_map *map, int x, int y);
 int		is_collectible(t_map *map, int x, int y);
 int		is_exit(t_map *map, int x, int y);
 void	collect_item(t_map *map, int x, int y);
 void	set_player_pos(t_map *map, int x, int y);
+void	init_enemies(t_game *game);
+void	update_enemies(t_game *game);
+int		check_enemy_collision(t_game *game);
+int		game_loop(void);
 
 #endif
