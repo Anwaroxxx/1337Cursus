@@ -50,6 +50,7 @@ static void	read_map_lines(char *file, t_game *game)
 	close(fd);
 }
 
+
 void	parse_map(char *file, t_game *game)
 {
 	game->map.height = get_map_height(file);
