@@ -1,52 +1,30 @@
 #include "so_long.h"
 
-t_img	create_color_image(t_game *game, int color)
+t_img	load_xpm(t_game *game, char *path)
 {
 	t_img	img;
 
-	img.img = mlx_new_image(game->mlx, TILE_SIZE, TILE_SIZE);
+	img.img = mlx_xpm_file_to_image(game->mlx, path, &img.width, &img.height);
 	if (!img.img)
-		error_exit("Error: Failed to create image", game);
+		error_exit("Error: Failed to load XPM", game);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	img.width = TILE_SIZE;
-	img.height = TILE_SIZE;
-	(void)color;
 	return (img);
-}
-
-static void	fill_image(t_img *img, int color)
-{
-	int	x;
-	int	y;
-	char	*dst;
-
-	y = 0;
-	while (y < TILE_SIZE)
-	{
-		x = 0;
-		while (x < TILE_SIZE)
-		{
-			dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-			*(unsigned int *)dst = color;
-			x++;
-		}
-		y++;
-	}
 }
 
 void	init_images(t_game *game)
 {
-	game->wall = create_color_image(game, 0x000000);
-	fill_image(&game->wall, 0x444444);
-	game->floor = create_color_image(game, 0x000000);
-	fill_image(&game->floor, 0x1A1A2E);
-	game->player = create_color_image(game, 0x000000);
-	fill_image(&game->player, 0x00FF00);
-	game->collectible = create_color_image(game, 0x000000);
-	fill_image(&game->collectible, 0xFFD700);
-	game->exit = create_color_image(game, 0x000000);
-	fill_image(&game->exit, 0xFF0000);
+	game->wall = load_xpm(game, "sprites/wall.xpm");
+	game->floor = load_xpm(game, "sprites/floor.xpm");
+	game->player = load_xpm(game, "sprites/player_down.xpm");
+	game->player_up = load_xpm(game, "sprites/player_up.xpm");
+	game->player_down = load_xpm(game, "sprites/player_down.xpm");
+	game->player_left = load_xpm(game, "sprites/player_left.xpm");
+	game->player_right = load_xpm(game, "sprites/player_right.xpm");
+	game->collectible = load_xpm(game, "sprites/collectible.xpm");
+	game->exit = load_xpm(game, "sprites/exit_closed.xpm");
+	game->exit_open = load_xpm(game, "sprites/exit_open.xpm");
+	game->enemy = load_xpm(game, "sprites/enemy.xpm");
 }
 
 void	render_tile(t_game *game, t_img *img, int x, int y)
@@ -72,11 +50,30 @@ void	render_map(t_game *game)
 			else if (game->map.grid[y][x] == 'C')
 				render_tile(game, &game->collectible, x, y);
 			else if (game->map.grid[y][x] == 'E')
-				render_tile(game, &game->exit, x, y);
+			{
+				if (game->collectibles_collected == game->map.collectibles)
+					render_tile(game, &game->exit_open, x, y);
+				else
+					render_tile(game, &game->exit, x, y);
+			}
 			else if (game->map.grid[y][x] == 'P')
-				render_tile(game, &game->player, x, y);
+			{
+				if (game->player_dir == 0)
+					render_tile(game, &game->player_up, x, y);
+				else if (game->player_dir == 1)
+					render_tile(game, &game->player_down, x, y);
+				else if (game->player_dir == 2)
+					render_tile(game, &game->player_left, x, y);
+				else
+					render_tile(game, &game->player_right, x, y);
+			}
 			x++;
 		}
 		y++;
 	}
+	for (int i = 0; i < game->enemy_count; i++)
+		render_tile(game, &game->enemy, game->enemy_x[i], game->enemy_y[i]);
+	char moves_str[32];
+	sprintf(moves_str, "Moves: %d", game->moves);
+	mlx_string_put(game->mlx, game->win, 10, 20, 0xFFFFFF, moves_str);
 }
