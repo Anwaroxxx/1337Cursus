@@ -1,0 +1,20 @@
+# Build artifacts
+so_long
+*.o
+
+# Minilibx build
+minilibx/obj/
+minilibx/libmlx.a
+minilibx/libmlx_Linux.a
+minilibx/makefile.gen
+minilibx/test/mlx-test
+minilibx/test/main.o
+
+# Test files
+/test_*
+/tmp_*
+
+# Editor
+*~
+.vscode/
+.idea/
