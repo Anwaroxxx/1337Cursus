@@ -64,7 +64,8 @@ static void	check_valid_chars(t_game *game)
 				&& game->map.grid[y][x] != TILE_WALL
 				&& game->map.grid[y][x] != TILE_COLLECTIBLE
 				&& game->map.grid[y][x] != TILE_EXIT
-				&& game->map.grid[y][x] != TILE_PLAYER)
+				&& game->map.grid[y][x] != TILE_PLAYER
+				&& game->map.grid[y][x] != TILE_ENEMY)
 				error_exit("Error: Invalid character in map", game);
 			x++;
 		}
